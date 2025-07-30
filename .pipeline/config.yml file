@@ -1,23 +1,27 @@
 general:
-  
-service:
 
-  stages:
-    Build:
+
+service:
   
-      runFirst: 
-        command: Terraform init
+
 stages:
   Build:
-    npmExecuteLint: false
-  Additional Unit Tests:
-    npmExecuteScripts: false
-  Acceptance:
-    kubernetesDeploy: false
-  Compliance:
-    sonarExecuteScan: false
-  Build:
-  
-      runSecond: 
-        command: Terraform validate
-  
+    runSteps:
+      - name: "Terraform Init"
+        command: |
+          terraform init
+      - name: "Terraform Validate"
+        command: |
+          terraform validate
+
+  Plan:
+    runSteps:
+      - name: "Terraform Plan"
+        command: |
+          terraform plan -out=tfplan.out
+
+  Apply:
+    runSteps:
+      - name: "Terraform Apply"
+        command: |
+          terraform apply -auto-approve tfplan.out
