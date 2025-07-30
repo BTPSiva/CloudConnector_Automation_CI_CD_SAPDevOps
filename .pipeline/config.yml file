@@ -1,27 +1,25 @@
 general:
-
-
-service:
-  
+  terraformCredentialsId: "terraform-service-account"  # Jenkins credentials ID for cloud provider auth
+  terraformDir: "./terraform"                          # Path where main.tf is located
 
 stages:
-  Build:
-    runSteps:
-      - name: "Terraform Init"
-        command: |
-          terraform init
-      - name: "Terraform Validate"
-        command: |
-          terraform validate
+  initStage:
+    enabled: true
+  validateStage:
+    enabled: true
+  planStage:
+    enabled: true
+  applyStage:
+    enabled: false    # Enable only for prod or controlled pipelines
 
-  Plan:
-    runSteps:
-      - name: "Terraform Plan"
-        command: |
-          terraform plan -out=tfplan.out
+steps:
+  terraformInit:
+   
 
-  Apply:
-    runSteps:
-      - name: "Terraform Apply"
-        command: |
-          terraform apply -auto-approve tfplan.out
+  terraformValidate:
+   
+
+  terraformPlan:
+   
+  terraformApply:
+    autoApprove: true                   # Automatically approve plan (use with caution)
