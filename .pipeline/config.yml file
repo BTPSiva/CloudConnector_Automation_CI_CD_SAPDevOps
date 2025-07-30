@@ -1,1 +1,28 @@
+general:
+  buildTool: "terraform"
+
+stages:
+  Init:
+    terraformInit: true
+  Validate:
+    terraformValidate: true
+  Plan:
+    terraformPlan: true
+  Apply:
+    terraformApply: true   # Set to true only in Release pipeline or manually
+  Destroy:
+    terraformDestroy: false # Optional; set to true when needed
+
+steps:
+  terraformInit:
+  
+
+  terraformValidate:
+   
+
+  terraformPlan:
+  
+
+  terraformApply:
+    autoApprove: true  
 
