@@ -1,11 +1,23 @@
----
 general:
-
+  
 service:
 
   stages:
     Build:
-      runFirst:
-        command: "Terraform init"
-      runLast:
-        command: "Terraform validate"
+  
+      runFirst: 
+        command: Terraform init
+stages:
+  Build:
+    npmExecuteLint: false
+  Additional Unit Tests:
+    npmExecuteScripts: false
+  Acceptance:
+    kubernetesDeploy: false
+  Compliance:
+    sonarExecuteScan: false
+  Build:
+  
+      runSecond: 
+        command: Terraform validate
+  
