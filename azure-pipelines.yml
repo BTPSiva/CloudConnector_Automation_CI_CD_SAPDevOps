@@ -15,5 +15,12 @@ steps:
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
+    set BTP_USERNAME=perabathula.nagasiva@sap.com
+    set BTP_PASSWORD=Allgodsofmexico27
+    echo Terraform code is started deploying.
+    echo executing the Terraform code in SAP BTP.......
+    terraform --version
+    terraform init
+    terraform plan
+    terraform apply -auto-approve
   displayName: 'Run a multi-line script'
