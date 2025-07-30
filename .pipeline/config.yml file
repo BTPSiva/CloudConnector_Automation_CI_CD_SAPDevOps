@@ -1,15 +1,31 @@
+---
+general:
+  buildTool: "mta"
+service:
+  buildToolVersion: "MBTJ21N22"
+  stages:
+    Build:
+      runFirst:
+        command: "terraform init"
+      runLast:
+        command: "Terraform validate"
+stages:
+  Build:
+    mavenExecuteStaticCodeChecks: false
+    npmExecuteLint: false
+  Acceptance:
+    cloudFoundryDeploy: false
+    npmExecuteEndToEndTests: false
+  Malware Scan:
+    malwareExecuteScan: false
+  Release:
+    tmsExport: false
+    tmsUpload: false
+    cloudFoundryDeploy: false
+  Additional Unit Tests:
+    npmExecuteScripts: false
+  Compliance:
+    sonarExecuteScan: false
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    set BTP_USERNAME=perabathula.nagasiva@sap.com
-    set BTP_PASSWORD=Allgodsofmexico27
-    echo Terraform code is started deploying.
-    echo executing the Terraform code in SAP BTP.......
-    terraform --version
-    terraform init
-    terraform plan
-    terraform apply -auto-approve
-
-  displayName: 'Run a multi-line script'
+  artifactPrepareVersion:
+    versioningType: "cloud_noTag"
